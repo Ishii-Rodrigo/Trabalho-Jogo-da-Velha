@@ -1,3 +1,4 @@
+import random
 from jogo_da_velha import branco, token, verifica_ganhador
 
 score = {
@@ -6,7 +7,6 @@ score = {
     "O": -1
 }
 
-#função de posições
 def get_posicoes(board):
     posicoes = []
 
@@ -17,7 +17,18 @@ def get_posicoes(board):
     
     return posicoes
 
-#função de movimento da I.A.
+def movimento_ia_facil(board, jogador):
+    possibilidades = get_posicoes(board)
+    movimento = random.choice(possibilidades)
+    return movimento[0], movimento[1]
+
+def movimento_ia_medio(board, jogador):
+    
+    if random.random() < 0.5:
+        return movimento_ia(board, jogador)
+    else:
+        return movimento_ia_facil(board, jogador)
+
 def movimento_ia(board, jogador):
     possibilidades = get_posicoes(board)
     melhor_valor = None
